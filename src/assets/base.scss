@@ -99,6 +99,7 @@ body {
     }
 
     .form-input {
+      position: relative;
       font-family: $primary-font;
       color: $tertiary-color;
       font-size: 1rem;
@@ -119,6 +120,7 @@ body {
         color: $tertiary-color;
         font-weight: 700;
       }
+      z-index: 2;
     }
 
     button {
