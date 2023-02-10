@@ -10,13 +10,16 @@
           type="text"
           class="form-input"
           placeholder="Type a Pókemon Name"
+          v-model="searchValue"
         />
         <div class="input-options">
-          
+          <div v-for="(pokemon, index) in pokemonSearch" v-bind:key="index" class="option" v-on:click="sendSearchOption">
+            {{pokemon}}
+          </div>
         </div>
       </div>
 
-      <button type="button">
+      <button type="button" v-on:click="sendSearch">
         <i class="fa-solid fa-magnifying-glass"></i>
       </button>
     </form>
@@ -31,60 +34,83 @@ export default {
   data() {
     return {
       pokemons: [],
-      pesquisa : "",
+      pesquisa: "",
+      pokemonSearch: [],
+      finallySearch: "",
+      searchValue: "",
     };
   },
+
   methods: {
-    getInput(event){
+    getInput(event) {
       let PokemonPesquisado = event.target.value;
       this.pesquisa = PokemonPesquisado;
 
       this.searchPokemon(this.pesquisa);
     },
-    searchPokemon(search){
 
-     let pokemonNames = [];
-     console.log(search);
+    searchPokemon(search) {
 
-     this.pokemons.map(pokemon => pokemonNames.push(pokemon.name));
-     let pokemonSearchResult = pokemonNames.filter(pokemon => pokemon.includes(search));
-
-     pokemonSearchResult =  pokemonSearchResult.map(pokemon => pokemon.replace('-', ' '))
-   
-     
-
-     if(pokemonSearchResult.length > 1){
       
-        let divInputOptions = document.querySelector('.input-options');
-        divInputOptions.innerHTML = "";
+      if (search == null || search == "" || search == " ") {
 
-        let LenghtOfArray = pokemonSearchResult.length;
-
-        for(let i = 0; i < LenghtOfArray; i++  ){
-          let createOption = document.createElement('div');
-          createOption.classList.add('option');
-          createOption.appendChild(document.createTextNode(pokemonSearchResult[i]))
-          divInputOptions.appendChild(createOption);
-        }
-        
-        
+        return;
        
+
+      } else {
+
+        let pokemonNames = [];
+       
+
+        this.pokemons.map((pokemon) => pokemonNames.push(pokemon.name));
+        let pokemonSearchResult = pokemonNames.filter((pokemon) =>
+          pokemon.includes(search)
+        );
+       
+        this.pokemonSearch = pokemonSearchResult;
         
-     }
 
-     else{
-      console.log("nada encontrado");
-     }
+        
 
-    
+      }
+    },
+
+    sendSearch(){
+      let search = document.querySelector('.form-input');
+      let result = search.value;
+      this.searchPokemon(result);
+    },
+
+    sendSearchOption(event){
+     
+      this.finallySearch = (event.target.innerHTML).replace(' ', '-');
+      console.log(this.finallySearch)
     }
   },
+
+  watch: {
+     searchValue(newValue){
+      if(newValue === null || newValue === "" || newValue === " " || newValue.length < 1){
+        return;
+      }
+
+      else{
+        console.log(newValue);
+        this.searchPokemon(newValue);
+      }
+      
+    },
+    
+  },
+
   async mounted() {
     let result = await axios.get(
-      "https://pokeapi.co/api/v2/pokemon/?offset=700&limit=700"
+      "https://pokeapi.co/api/v2/pokemon/?limit=1000"
     );
     result.data.results.map((pokemon) => this.pokemons.push(pokemon));
-   
+  
+
+    
   },
 };
 </script>
