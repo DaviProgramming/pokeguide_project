@@ -1,6 +1,6 @@
 <template>
-  <startComponent/>
-  
+  <startComponent />
+
 </template>
 
 
@@ -9,16 +9,28 @@
 
 import startComponent from './components/startComponent.vue'
 
+
 export default {
   name: 'App',
-  components:{
-    startComponent
+  data(){
+    return{
+      search: "",
+    }
+  },
 
-  }
+  components:{
+    startComponent,
+  },
+
+  methods:{
+    getUserSearch(search){
+   
+    console.log(search)
+    }
+  },
+ 
   
 }
 </script>
 
-<style>
 
-</style>

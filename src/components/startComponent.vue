@@ -1,9 +1,13 @@
 <template>
-  <section class="container start">
+  <main class="container start"  v-if="activyPage == false">
+    <div class="title">
+      <img src="../assets/Pokebola-Pokémon-PNG-1024x1022.png" alt="">
     <h1>PokéGuide</h1>
-
-    <img src="../assets/pokemons.png" alt="" />
-    <form>
+  </div>
+   
+      <img src="../assets/pokemons.png" alt="" />
+    
+    <form onsubmit="return false">
       <div class="form-control">
         <input
           v-on:change="getInput"
@@ -13,8 +17,13 @@
           v-model="searchValue"
         />
         <div class="input-options">
-          <div v-for="(pokemon, index) in pokemonSearch" v-bind:key="index" class="option" v-on:click="sendSearchOption">
-            {{pokemon}}
+          <div
+            v-for="(pokemon, index) in pokemonSearch"
+            v-bind:key="index"
+            class="option"
+            v-on:click="sendSearchOption"
+          >
+            {{ pokemon }}
           </div>
         </div>
       </div>
@@ -23,11 +32,16 @@
         <i class="fa-solid fa-magnifying-glass"></i>
       </button>
     </form>
+  </main>
+
+  <section v-if="activyPage == true" class="container pokeinfo">
+    <searchComponent :pokemonToGetInfos="finallySearch" />
   </section>
 </template>
 
 <script>
 import axios from "axios";
+import searchComponent from "../components/searchComponent.vue";
 
 export default {
   name: "startComponent",
@@ -38,7 +52,12 @@ export default {
       pokemonSearch: [],
       finallySearch: "",
       searchValue: "",
+      activyPage: false,
     };
+  },
+
+  components: {
+    searchComponent,
   },
 
   methods: {
@@ -50,57 +69,45 @@ export default {
     },
 
     searchPokemon(search) {
-
-      
       if (search == null || search == "" || search == " ") {
-
         return;
-       
-
       } else {
-
         let pokemonNames = [];
-       
 
         this.pokemons.map((pokemon) => pokemonNames.push(pokemon.name));
         let pokemonSearchResult = pokemonNames.filter((pokemon) =>
           pokemon.includes(search)
         );
-       
+
         this.pokemonSearch = pokemonSearchResult;
-        
-
-        
-
       }
     },
 
-    sendSearch(){
-      let search = document.querySelector('.form-input');
+    sendSearch() {
+      let search = document.querySelector(".form-input");
       let result = search.value;
       this.searchPokemon(result);
     },
 
-    sendSearchOption(event){
-     
-      this.finallySearch = (event.target.innerHTML).replace(' ', '-');
-      console.log(this.finallySearch)
-    }
+    sendSearchOption(event) {
+      this.finallySearch = event.target.innerHTML.replace(" ", "-");
+      this.activyPage = true;
+    },
   },
 
   watch: {
-     searchValue(newValue){
-      if(newValue === null || newValue === "" || newValue === " " || newValue.length < 1){
+    searchValue(newValue) {
+      if (
+        newValue === null ||
+        newValue === "" ||
+        newValue === " " ||
+        newValue.length < 1
+      ) {
         return;
-      }
-
-      else{
-        console.log(newValue);
+      } else {
         this.searchPokemon(newValue);
       }
-      
     },
-    
   },
 
   async mounted() {
@@ -108,9 +115,6 @@ export default {
       "https://pokeapi.co/api/v2/pokemon/?limit=1000"
     );
     result.data.results.map((pokemon) => this.pokemons.push(pokemon));
-  
-
-    
   },
 };
 </script>
