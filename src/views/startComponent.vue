@@ -1,11 +1,9 @@
 <template>
   <main class="container start"  v-if="activyPage == false">
-    <div class="title">
-      <img src="../assets/Pokebola-Pokémon-PNG-1024x1022.png" alt="">
-    <h1>PokéGuide</h1>
-  </div>
+
+    <titleComponent />
    
-      <img src="../assets/pokemons.png" alt="" />
+      <img src="../assets/images/pokemons.png" alt="" />
     
     <form onsubmit="return false">
       <div class="form-control">
@@ -45,7 +43,9 @@
 
 <script>
 import axios from "axios";
-import searchComponent from "../components/searchComponent.vue";
+import searchComponent from "../views/searchComponent.vue";
+import titleComponent from "../components/titleComponent.vue";
+
 
 export default {
   name: "startComponent",
@@ -62,7 +62,8 @@ export default {
 
   components: {
     searchComponent,
-  },
+    titleComponent
+},
 
   methods: {
     getInput(event) {

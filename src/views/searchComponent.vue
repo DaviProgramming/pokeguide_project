@@ -1,8 +1,8 @@
 <template>
   <div class="title">
-    <a href="/">
-      <img src="../assets/Pokebola-Pokémon-PNG-1024x1022.png" alt="" />
-    </a>
+        <a href="">
+            <img src="../assets/images/Pokebola-Pokémon-PNG-1024x1022.png" alt="" />
+        </a>
   </div>
 
   <form>

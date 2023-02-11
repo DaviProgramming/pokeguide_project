@@ -1,0 +1,50 @@
+@media screen and (max-width: 768px) {
+    .container.pokeinfo{
+      .form-control{
+       width: 100vw!important;
+      }
+  
+      ul{
+       grid-template-columns: repeat(1,1fr)
+      }
+  
+      .info{
+        
+        
+        &:first-child .left{
+          border-start-start-radius: 50px!important;
+        }
+        
+        &:first-child .right{
+          border-radius: 50px!important;
+        }
+  
+        &:nth-child(2){
+          border-start-end-radius: 0!important;
+        }
+  
+        &:nth-child(3), &:nth-child(3) .left{
+          border-bottom-left-radius: 0px!important;
+        }
+  
+        &:nth-child(5) .left{
+          border-bottom-left-radius: 0px!important;
+        }
+    
+        &:last-child .left{
+          border-end-start-radius: 40px!important;
+        }
+       
+  
+      
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+      img{
+          width: 300px;
+          
+      }
+  }
+  
+  }

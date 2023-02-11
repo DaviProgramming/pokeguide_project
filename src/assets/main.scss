@@ -1,1 +1,11 @@
-@import url(./base.scss);
+@import './sass/abstracts/fonts';
+@import './sass/abstracts/variables';
+
+
+@import './sass/layout/body';
+@import './sass/layout/container';
+
+@import './sass/pages/home';
+@import './sass/pages/search';
+
+@import './sass/breakpoints/mediaqueries';
