@@ -2,9 +2,7 @@
   <main class="container start"  v-if="activyPage == false">
 
     <titleComponent />
-   
-      <img src="../assets/images/pokemons.png" alt="" />
-    
+
     <form onsubmit="return false">
       <div class="form-control">
         <input
@@ -34,6 +32,10 @@
         <i class="fa-solid fa-magnifying-glass"></i>
       </button>
     </form>
+   
+      <img src="../assets/images/pokemons.png" alt="" />
+    
+    
   </main>
 
   <section v-if="activyPage == true" class="container pokeinfo">

@@ -50,23 +50,34 @@
     <div class="pokemon-infos-body">
       <ul>
         <li class="info">
-          <div class="left">Ataque</div>
+          <div class="left">
+           
+            Ataque</div>
           <div class="right">{{ ataque }}</div>
         </li>
         <li class="info">
-          <div class="left">Defesa</div>
+          <div class="left">
+          
+            Defesa</div>
           <div class="right">{{ defesa }}</div>
         </li>
         <li class="info">
-          <div class="left">Velocidade</div>
+          <div class="left">
+           
+            Velocidade
+          </div>
           <div class="right">{{ velocidade }}</div>
         </li>
         <li class="info">
-          <div class="left">Hp</div>
+          <div class="left">
+            Hp
+          </div>
           <div class="right">{{ hp }}</div>
         </li>
         <li class="info">
-          <div class="left">Ataque Especial</div>
+          <div class="left">
+           
+            Ataque Especial</div>
           <div class="right">{{ ataqueEspecial }}</div>
         </li>
         <li class="info">
@@ -103,9 +114,10 @@ export default {
   },
 
   methods: {
-    removeContent() {
-      let content = document.querySelector(".container.pokerinfo");
-      content.innerHTML = "";
+    removeSearch() {
+        let input = document.querySelector('.form-input');
+        input.value = "";
+       
     },
 
     getInput(event) {
@@ -140,7 +152,9 @@ export default {
 
     sendSearchOption(event) {
       this.finallySearch = event.target.innerHTML.replace(" ", "-");
+      
       this.update(this.finallySearch);
+    
     },
 
     async update(namePokemon) {
@@ -194,7 +208,7 @@ export default {
     this.defesaEspecial = result.data.stats[4].base_stat;
     this.velocidade = result.data.stats[5].base_stat;
     this.imagem = result.data.sprites.front_default;
-    console.log(result.data.stats);
+    console.log(result.data);
   },
 };
 </script>
