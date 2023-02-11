@@ -32,8 +32,10 @@
         <i class="fa-solid fa-magnifying-glass"></i>
       </button>
     </form>
-   
+
+    <div class="wallpaper">
       <img src="../assets/images/pokemons.png" alt="" />
+    </div>
     
     
   </main>

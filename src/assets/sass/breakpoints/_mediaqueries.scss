@@ -1,4 +1,19 @@
 @media screen and (max-width: 768px) {
+
+
+  .container.start{
+    form{
+      width: 100vw!important;
+    }
+
+    .form-input::placeholder {
+
+      font-size: 0.6rem
+
+    }
+
+  } 
+
     .container.pokeinfo{
       .form-control{
        width: 100vw!important;

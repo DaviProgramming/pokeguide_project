@@ -215,6 +215,26 @@
          font-size: 1.1rem;
          color: $white-color;
          cursor: pointer;
+
+         &:focus{
+          border: 2px solid $white-color;
+          animation: buttonMove 0.2s ease-in-out;
+        }
+
+        @keyframes buttonMove {
+
+          from{
+            transform: translateY(0px);
+           }
+
+           to{
+            transform: translateY(-5px);
+           }  
+
+           
+        }
        }
+
+
      }
    }
