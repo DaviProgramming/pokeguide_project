@@ -1,24 +1,32 @@
-# pokeguide_project
+# **POKÉGUIDE PROJECT**
 
-## Project setup
-```
-npm install
-```
+## **Projeto simples utilizando a API PokeAPI.**
+### API está que permite o usuario receber as mais variadas informações sobre pokémons.
+<br>
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## **Neste projeto utilizei as seguintes Tecnologias:**
 
-### Compiles and minifies for production
-```
-npm run build
-```
+* ### **VUE.JS**
+* ### **SCSS**
+* ### **AXIOS**
+* ### **VUE-ROUTER**
 
-### Lints and fixes files
-```
-npm run lint
-```
+<br>
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### **Neste projeto é possivel pesquisar por um Pókemon que desejar e obtér informações sobre o mesmo**
+
+<br>
+
+### **Exemplo:**
+
+![image1](https://i.imgur.com/Im2Lyqn.jpg)
+![image2](https://i.imgur.com/ye0lc4L.jpg)
+
+
+### Link da Hospedagem na Vercel: **https://pokeguide.vercel.app/**
+
+
+
+
+
+
