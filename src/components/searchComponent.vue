@@ -1,35 +1,45 @@
 <template>
+  <div class="title">
+    <a href="/">
+      <img src="../assets/Pokebola-Pokémon-PNG-1024x1022.png" alt="" />
+    </a>
+  </div>
 
-    
+  <form>
+    <div class="form-control">
+      <input
+        v-on:change="getInput"
+        type="text"
+        class="form-input"
+        placeholder="Type a Pókemon Name"
+        v-model="searchValue"
+      />
 
-    <form>
-        <div class="form-control">
-          <input
-            v-on:change="getInput"
-            type="text"
-            class="form-input"
-            placeholder="Type a Pókemon Name"
-            v-model="searchValue"
-          />
-          <div class="input-options">
-            <div
-              v-for="(pokemon, index) in pokemonSearch"
-              v-bind:key="index"
-              class="option"
-              v-on:click="sendSearchOption"
-            >
-              {{ pokemon }}
-            </div>
-          </div>
+      <div class="input-options">
+        <div
+          v-for="(pokemon, index) in pokemonSearch"
+          v-bind:key="index"
+          class="option"
+          v-on:click="sendSearchOption"
+        >
+          {{ pokemon }}
         </div>
-  
-        <button type="button" v-on:click="sendSearch">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
-      </form>
-    
-    
-  <div class="pokemon-infos" v-if="searchValue != null || searchValue != ''">
+
+        <div
+          class="option"
+          v-if="pokemonSearch.length == 0 && searchValue.length > 1"
+        >
+          Nada encontrado
+        </div>
+      </div>
+    </div>
+
+    <button type="button" v-on:click="sendSearch">
+      <i class="fa-solid fa-magnifying-glass"></i>
+    </button>
+  </form>
+
+  <div class="pokemon-infos">
     <div class="pokemon-infos-head">
       <h2>{{ name }}</h2>
       <div class="card">
@@ -55,6 +65,14 @@
           <div class="left">Hp</div>
           <div class="right">{{ hp }}</div>
         </li>
+        <li class="info">
+          <div class="left">Ataque Especial</div>
+          <div class="right">{{ ataqueEspecial }}</div>
+        </li>
+        <li class="info">
+          <div class="left">Defesa Especial</div>
+          <div class="right">{{ defesaEspecial }}</div>
+        </li>
       </ul>
     </div>
   </div>
@@ -77,17 +95,17 @@ export default {
       ataque: "",
       defesa: "",
       hp: "",
-      habilidades: "",
+      ataqueEspecial: "",
+      defesaEspecial: "",
       velocidade: "",
       imagem: "",
     };
   },
 
   methods: {
-
-    removeContent(){
-        let content = document.querySelector('.container.pokerinfo');
-        content.innerHTML = "";
+    removeContent() {
+      let content = document.querySelector(".container.pokerinfo");
+      content.innerHTML = "";
     },
 
     getInput(event) {
@@ -109,6 +127,8 @@ export default {
         );
 
         this.pokemonSearch = pokemonSearchResult;
+
+        console.log(this.pokemonSearch);
       }
     },
 
@@ -120,21 +140,22 @@ export default {
 
     sendSearchOption(event) {
       this.finallySearch = event.target.innerHTML.replace(" ", "-");
-      this.update(this.finallySearch)
+      this.update(this.finallySearch);
     },
 
-    async update(namePokemon){
-        let result = await axios.get("https://pokeapi.co/api/v2/pokemon/" + namePokemon);
-        this.name = result.data.name;
-        this.hp = result.data.stats[0].base_stat;
-        this.ataque = result.data.stats[1].base_stat;
-        this.defesa = result.data.stats[2].base_stat;
-        this.velocidade = result.data.stats[5].base_stat;
-        this.imagem = result.data.sprites.front_default;
+    async update(namePokemon) {
+      let result = await axios.get(
+        "https://pokeapi.co/api/v2/pokemon/" + namePokemon
+      );
+      this.name = result.data.name;
+      this.hp = result.data.stats[0].base_stat;
+      this.ataque = result.data.stats[1].base_stat;
+      this.defesa = result.data.stats[2].base_stat;
+      this.velocidade = result.data.stats[5].base_stat;
+      this.imagem = result.data.sprites.front_default;
 
-        this.pokemonSearch = [];
-    }
-
+      this.pokemonSearch = [];
+    },
   },
 
   props: {
@@ -154,33 +175,27 @@ export default {
         this.searchPokemon(newValue);
       }
     },
-
-   
-
   },
 
   async created() {
-
     let resultPokemons = await axios.get(
       "https://pokeapi.co/api/v2/pokemon/?limit=1000"
     );
     resultPokemons.data.results.map((pokemon) => this.pokemons.push(pokemon));
 
-
-    let result = await axios.get("https://pokeapi.co/api/v2/pokemon/" + this.pokemonToGetInfos);
+    let result = await axios.get(
+      "https://pokeapi.co/api/v2/pokemon/" + this.pokemonToGetInfos
+    );
     this.name = result.data.name;
     this.hp = result.data.stats[0].base_stat;
     this.ataque = result.data.stats[1].base_stat;
     this.defesa = result.data.stats[2].base_stat;
+    this.ataqueEspecial = result.data.stats[3].base_stat;
+    this.defesaEspecial = result.data.stats[4].base_stat;
     this.velocidade = result.data.stats[5].base_stat;
     this.imagem = result.data.sprites.front_default;
-
-    
-
-    console.log(this.name);
+    console.log(result.data.stats);
   },
-
- 
 };
 </script>
 

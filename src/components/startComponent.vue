@@ -25,6 +25,10 @@
           >
             {{ pokemon }}
           </div>
+
+          <div class="option"  v-if="pokemonSearch.length == 0 && searchValue.length > 1">
+            Nada encontrado
+          </div>
         </div>
       </div>
 
