@@ -17,7 +17,7 @@
 
 <br>
 
-### **Exemplo:**
+### **Imagens do projeto:**
 
 ![image1](https://i.imgur.com/Im2Lyqn.jpg)
 ![image2](https://i.imgur.com/ye0lc4L.jpg)
